@@ -32,8 +32,6 @@
 
 (use-package pdf-tools)     ; PDF reading
 (use-package nov)           ; EPUB Reading
-(use-package gruvbox-theme) ; Theme
-(load-theme 'gruvbox t)
 
 
 (use-package evil           ; VIM
@@ -57,19 +55,27 @@
 
 (use-package powerline)
 
+(use-package elfeed)
+  :init
+  (setq elfeed-feeds
+      '("https://archlinux.org/feeds/news/"                            
+	"https://bugs.archlinux.org/feed.php?feed_type=rss2&project=0" 	
+	"https://www.reddit.com/r/kernel/.rss"                     
+	"https://www.schneier.com/feed/atom"))
+  :config
+  (elfeed-update)
+
 (use-package flycheck-aspell)
- 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(ispell-dictionary "american")
- '(package-selected-packages
-   '(flycheck-aspell powerline use-package-ensure-system-package twittering-mode telephone-line pdf-tools org-roam-ui nov neotree gruvbox-theme flycheck-haskell exwm evil-easymotion evil-collection dashboard counsel beacon auto-compile)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+
+(use-package solarized-theme)
+  :config
+  (load-theme `solarized-dark t)
+
+(use-package lsp-mode)
+
+(use-package company)
+
+(use-package treemacs)
+  :ensure t
+  :defer t
+
