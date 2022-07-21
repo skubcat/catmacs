@@ -79,3 +79,5 @@
   :ensure t
   :defer t
 
+(use-package disaster)
+
