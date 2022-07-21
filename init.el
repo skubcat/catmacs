@@ -20,9 +20,9 @@
 (setq byte-compile-warnings '(cl-functions))
 
 
-					; General
-(scroll-bar-mode -1)        ; Disable visible scrollbar
-(global-display-line-numbers-mode t) ; Display line numbers
+					       ; General
+(scroll-bar-mode -1)                           ; Disable visible scrollbar
+(global-display-line-numbers-mode t)           ; Display line numbers
 (setq display-time-default-load-average nil)
       (display-time-mode t)
 
