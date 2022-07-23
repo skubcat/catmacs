@@ -20,9 +20,9 @@
 (setq byte-compile-warnings '(cl-functions))
 
 
-					       ; General
-(scroll-bar-mode -1)                           ; Disable visible scrollbar
-(global-display-line-numbers-mode t)           ; Display line numbers
+					; General
+(scroll-bar-mode -1)        ; Disable visible scrollbar
+(global-display-line-numbers-mode t) ; Display line numbers
 (setq display-time-default-load-average nil)
       (display-time-mode t)
 
@@ -74,10 +74,34 @@
 (use-package lsp-mode)
 
 (use-package company)
+  :config
+  (add-hook `after-init-hook `global-company-mode)
 
 (use-package treemacs)
   :ensure t
   :defer t
 
-(use-package disaster)
+(use-package disaster) 
+
+
+;; (use-package sly) I'll need to look more into this
+;;  :config
+;;  (setq inferior-lisp-program "/opt/sbcl/bin/sbcl")
+
+(use-package all-the-icons)
+
+(use-package go-mode)
+
+
+(use-package centaur-tabs
+  :demand
+  :config
+  (setq centaur-tabs-style "bar"
+  centaur-tabs-height 32
+  centaur-tabs-set-icons t)
+  :bind
+  ("C-<prior>" . centaur-tabs-backward)
+  ("C-<next>" . centaur-tabs-forward))
+
+
 
