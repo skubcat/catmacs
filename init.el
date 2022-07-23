@@ -105,4 +105,8 @@
   ("C-<next>" . centaur-tabs-forward))
 
 
-
+(use-package dirvish
+  :ensure t
+  :init
+  ;; Let Dirvish take over Dired globally
+  (dirvish-override-dired-mode))
