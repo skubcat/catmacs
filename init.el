@@ -92,6 +92,7 @@
 
 (use-package go-mode)
 
+(use-package org-chef)
 
 (use-package centaur-tabs
   :demand
