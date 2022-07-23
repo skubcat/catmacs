@@ -110,3 +110,5 @@
   :init
   ;; Let Dirvish take over Dired globally
   (dirvish-override-dired-mode))
+
+(use-package magit)
