@@ -1,1 +1,168 @@
 
+(require 'package)
+(add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/") t)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+(add-to-list 'package-archives '("nongnu" . "https://elpa.nongnu.org/nongnu/") t)
+(package-initialize)
+
+(when (not (package-installed-p 'use-package))
+  (package-refresh-contents)
+  (package-install 'use-package))
+
+;;;; https://calva.io/paredit/
+
+
+(require 'use-package-ensure)
+(setq use-package-always-ensure t)
+(use-package auto-compile
+    :config (auto-compile-on-load-mode))
+(setq load-prefer-newer t)
+(use-package use-package-ensure-system-package)
+(setq byte-compile-warnings '(cl-functions))
+
+
+					; General
+(scroll-bar-mode -1)        ; Disable visible scrollbar
+(global-display-line-numbers-mode t) ; Display line numbers
+
+(setq display-time-day-and-date t)
+(display-time)
+
+
+(use-package pdf-tools)     ; PDF reading
+(use-package nov)           ; EPUB Reading
+
+
+(use-package evil           ; VIM
+  :ensure t
+  :init
+  (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
+  (setq evil-want-keybinding nil)
+  :config
+  (evil-mode 1))
+
+(use-package evil-collection
+  :after evil
+  :ensure t
+  :config
+  (evil-collection-init))
+
+
+
+(use-package beacon
+  :config
+  (beacon-mode 1))
+
+(use-package powerline)
+
+(use-package elfeed)
+  :init
+  (setq elfeed-feeds
+      '("https://archlinux.org/feeds/news/"                            
+	"https://bugs.archlinux.org/feed.php?feed_type=rss2&project=0" 	
+	"https://www.reddit.com/r/kernel/.rss"                     
+	"https://www.schneier.com/feed/atom"))
+  :config
+  (elfeed-update)
+
+(use-package org-chef)
+
+(use-package flycheck-aspell)
+
+(use-package gruvbox-theme)
+  :config
+  (load-theme `gruvbox-dark-hard t)
+
+
+(use-package lsp-mode)
+
+(use-package company)
+  :config
+  (add-hook `after-init-hook `global-company-mode)
+
+(use-package treemacs)
+  :ensure t
+  :defer t
+
+(use-package disaster) 
+
+
+(use-package sly)
+  :config
+  (setq inferior-lisp-program "/opt/sbcl/bin/sbcl")
+ ;; '(custom-safe-themes
+ ;;   '("830877f4aab227556548dc0a28bf395d0abe0e3a0ab95455731c9ea5ab5fe4e1" "6b5c518d1c250a8ce17463b7e435e9e20faa84f3f7defba8b579d4f5925f60c1" "fee7287586b17efbfda432f05539b58e86e059e78006ce9237b8732fde991b4c" default))
+ ;; '(package-selected-packages
+ ;;   '(undo-fu-session undo-fu sly all-the-icons centaur-tabs go-mode slime disaster use-package-ensure-system-package treemacs solarized-theme powerline pdf-tools nov lsp-mode gruvbox-theme flycheck-aspell evil-collection elfeed company beacon auto-compile))
+ 
+
+(use-package all-the-icons)
+
+(use-package magit)
+
+(use-package centaur-tabs
+  :demand
+  :config
+  (setq centaur-tabs-style "bar"
+  centaur-tabs-height 32
+  centaur-tabs-set-icons t)
+  :bind
+  ("C-<prior>" . centaur-tabs-backward)
+  ("C-<next>" . centaur-tabs-forward))
+
+(use-package dirvish
+  :ensure t
+  :init
+  ;; Let Dirvish take over Dired globally
+  (dirvish-override-dired-mode))
+
+(use-package dashboard
+  :ensure t
+  :config
+  (dashboard-setup-startup-hook))
+
+;; Set the title
+(setq dashboard-banner-logo-title "octomacs")
+;; Set the banner
+(setq dashboard-startup-banner "~/Desktop/squid2.png")
+;; Value can be
+;; 'official which displays the official emacs logo
+;; 'logo which displays an alternative emacs logo
+;; 1, 2 or 3 which displays one of the text banners
+;; "path/to/your/image.gif", "path/to/your/image.png" or "path/to/your/text.txt" which displays whatever gif/image/text you would prefer
+
+;; Content is not centered by default. To center, set
+(setq dashboard-center-content t)
+
+;; To disable shortcut "jump" indicators for each section, set
+(setq dashboard-show-shortcuts nil)
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   '("78c4238956c3000f977300c8a079a3a8a8d4d9fee2e68bad91123b58a4aa8588" "83e0376b5df8d6a3fbdfffb9fb0e8cf41a11799d9471293a810deb7586c131e6" "cfd51857f5e80eddece7eb5d30b9afce81f442707207e0d636250d03978a66ec" "f5b6be56c9de9fd8bdd42e0c05fecb002dedb8f48a5f00e769370e4517dde0e8" "d14f3df28603e9517eb8fb7518b662d653b25b26e83bd8e129acea042b774298" "830877f4aab227556548dc0a28bf395d0abe0e3a0ab95455731c9ea5ab5fe4e1" "6b5c518d1c250a8ce17463b7e435e9e20faa84f3f7defba8b579d4f5925f60c1" "fee7287586b17efbfda432f05539b58e86e059e78006ce9237b8732fde991b4c" default))
+ '(package-selected-packages
+   '(oceanic-theme challenger-deep-theme writegood-mode dashboard org-chef dirvish magit ## undo-fu-session undo-fu sly all-the-icons centaur-tabs go-mode slime disaster use-package-ensure-system-package treemacs solarized-theme powerline pdf-tools nov lsp-mode gruvbox-theme flycheck-aspell evil-collection elfeed company beacon auto-compile))
+ '(warning-suppress-types
+   '((lsp-mode)
+     (lsp-mode)
+     (lsp-mode)
+     (lsp-mode)
+     (lsp-mode)
+     (lsp-mode))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+
+
+(use-package writegood-mode
+  :bind ("C-c g" . writegood-mode)
+  :config
+  (add-to-list 'writegood-weasel-words "actionable"))
+
