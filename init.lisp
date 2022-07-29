@@ -22,11 +22,3 @@
 (set-msg-border-width 3)
 (setf *message-window-padding* 6)
 
-(load-module "swm-gaps")
-
-(setf swm-gaps:*head-gaps-size* 20)
-
-(setf swm-gaps:*inner-gaps-size* 5)
-
-(setf swm-gaps:*outer-gaps-size* 30)
-
