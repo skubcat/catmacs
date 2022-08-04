@@ -1,4 +1,4 @@
-# macs-n-cheese
+# catmacs
 
 My personal config for emacs.
 
